@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import NavBar from '@/components/NavBar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Mic, Square, Save, RotateCcw } from 'lucide-react';
+import { Mic, Square, Save, RotateCcw, Bookmark } from 'lucide-react';
 import AudioVisualizer from '@/components/AudioVisualizer';
 import { toast } from '@/components/ui/use-toast';
 
@@ -131,51 +131,58 @@ const RecordAudio: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background transition-colors duration-300">
       <NavBar />
       
-      <div className="container pt-24 pb-16 px-4">
-        <h1 className="text-3xl font-bold mb-6">Record Audio</h1>
-        <p className="text-muted-foreground mb-8">Read the provided transcript and record your voice</p>
+      <div className="container pt-24 pb-16 px-4 max-w-5xl mx-auto">
+        <h1 className="text-4xl font-bold mb-2 text-center">Record Audio</h1>
+        <p className="text-muted-foreground mb-8 text-center text-lg">Read the provided transcript and record your voice</p>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="shadow-md">
-            <CardHeader>
-              <CardTitle>Transcript to Read</CardTitle>
+          <Card className="shadow-md border-2 overflow-hidden">
+            <CardHeader className="bg-primary/5 border-b">
+              <CardTitle className="flex items-center gap-2">
+                <Bookmark className="h-5 w-5" />
+                Transcript to Read
+              </CardTitle>
               <CardDescription>Read this text clearly when recording</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="bg-muted p-4 rounded-md text-lg leading-relaxed border">
+            <CardContent className="p-6">
+              <div className="bg-muted/30 p-6 rounded-md text-lg leading-relaxed border shadow-sm">
                 {transcript.text}
               </div>
+              
+              <div className="mt-6 flex flex-wrap gap-4 text-sm">
+                <div className="bg-primary/10 px-3 py-1 rounded-full">
+                  Language: <span className="font-medium">{transcript.language.toUpperCase()}</span>
+                </div>
+                <div className="bg-primary/10 px-3 py-1 rounded-full">
+                  ID: <span className="font-medium">{transcript.id}</span>
+                </div>
+              </div>
             </CardContent>
-            <CardFooter className="flex justify-between">
-              <div className="text-sm text-muted-foreground">
-                Language: <span className="font-medium">{transcript.language.toUpperCase()}</span>
-              </div>
-              <div className="text-sm text-muted-foreground">
-                ID: <span className="font-medium">{transcript.id}</span>
-              </div>
-            </CardFooter>
           </Card>
           
-          <Card className="shadow-md">
-            <CardHeader>
-              <CardTitle>Audio Recorder</CardTitle>
+          <Card className="shadow-md border-2 overflow-hidden">
+            <CardHeader className="bg-primary/5 border-b">
+              <CardTitle className="flex items-center gap-2">
+                <Mic className="h-5 w-5" />
+                Audio Recorder
+              </CardTitle>
               <CardDescription>Record yourself reading the transcript</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-6 flex flex-col gap-6">
               <AudioVisualizer isRecording={isRecording} audioStream={audioStream} />
               
-              <div className="flex flex-col items-center mt-6">
-                <p className="text-2xl font-mono font-semibold mb-4">{formatTime(recordingTime)}</p>
+              <div className="flex flex-col items-center mt-2">
+                <p className="text-3xl font-mono font-semibold mb-4">{formatTime(recordingTime)}</p>
                 
                 <div className="flex items-center justify-center space-x-4">
                   {!isRecording && !audioBlob ? (
                     <Button 
                       onClick={startRecording} 
                       size="lg" 
-                      className="rounded-full w-16 h-16 button-transition animate-pulse-glow"
+                      className="rounded-full w-16 h-16 button-transition animate-pulse-glow shadow-lg"
                     >
                       <Mic className="h-6 w-6" />
                     </Button>
@@ -184,7 +191,7 @@ const RecordAudio: React.FC = () => {
                       onClick={stopRecording} 
                       variant="destructive" 
                       size="lg" 
-                      className="rounded-full w-16 h-16 button-transition"
+                      className="rounded-full w-16 h-16 button-transition shadow-lg"
                     >
                       <Square className="h-6 w-6" />
                     </Button>
@@ -193,7 +200,7 @@ const RecordAudio: React.FC = () => {
                       <Button 
                         onClick={resetRecording} 
                         variant="outline" 
-                        className="button-transition"
+                        className="button-transition shadow-sm"
                       >
                         <RotateCcw className="mr-2 h-4 w-4" />
                         Discard
@@ -202,7 +209,7 @@ const RecordAudio: React.FC = () => {
                       <Button 
                         onClick={saveRecording} 
                         disabled={isSaving}
-                        className="button-transition"
+                        className="button-transition shadow-sm"
                       >
                         <Save className="mr-2 h-4 w-4" />
                         Submit Recording
@@ -213,7 +220,7 @@ const RecordAudio: React.FC = () => {
               </div>
               
               {audioUrl && (
-                <div className="mt-6 border border-input rounded-lg p-4">
+                <div className="mt-2 border border-input rounded-lg p-4 bg-card/50 shadow-sm">
                   <p className="text-sm font-medium mb-2">Preview Recording:</p>
                   <audio controls className="w-full" src={audioUrl}>
                     Your browser does not support the audio element.
