@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Mic, Upload, User, Home, LogOut } from 'lucide-react';
+import { Mic, Upload, FileText, CheckCircle, User, Home, LogOut, Settings } from 'lucide-react';
 
 const NavBar: React.FC = () => {
   const location = useLocation();
@@ -30,6 +30,36 @@ const NavBar: React.FC = () => {
                 Home
               </Button>
             </Link>
+            <Link to="/record">
+              <Button 
+                variant={isActive('/record') ? "default" : "ghost"} 
+                size="sm" 
+                className="button-transition"
+              >
+                <Mic className="mr-2 h-4 w-4" />
+                Record
+              </Button>
+            </Link>
+            <Link to="/transcribe">
+              <Button 
+                variant={isActive('/transcribe') ? "default" : "ghost"} 
+                size="sm" 
+                className="button-transition"
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                Transcribe
+              </Button>
+            </Link>
+            <Link to="/validate">
+              <Button 
+                variant={isActive('/validate') ? "default" : "ghost"} 
+                size="sm" 
+                className="button-transition"
+              >
+                <CheckCircle className="mr-2 h-4 w-4" />
+                Validate
+              </Button>
+            </Link>
             <Link to="/dashboard">
               <Button 
                 variant={isActive('/dashboard') ? "default" : "ghost"} 
@@ -38,6 +68,16 @@ const NavBar: React.FC = () => {
               >
                 <Upload className="mr-2 h-4 w-4" />
                 Dashboard
+              </Button>
+            </Link>
+            <Link to="/admin/upload">
+              <Button 
+                variant={isActive('/admin/upload') ? "default" : "ghost"} 
+                size="sm" 
+                className="button-transition"
+              >
+                <Settings className="mr-2 h-4 w-4" />
+                Admin
               </Button>
             </Link>
             <Link to="/login">

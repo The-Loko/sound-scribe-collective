@@ -8,6 +8,10 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import RecordAudio from "./pages/RecordAudio";
+import TranscribeAudio from "./pages/TranscribeAudio";
+import ValidateAudio from "./pages/ValidateAudio";
+import AdminUpload from "./pages/AdminUpload";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +25,10 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/record" element={<RecordAudio />} />
+          <Route path="/transcribe" element={<TranscribeAudio />} />
+          <Route path="/validate" element={<ValidateAudio />} />
+          <Route path="/admin/upload" element={<AdminUpload />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
