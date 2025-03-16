@@ -11,7 +11,7 @@ import NotFound from "./pages/NotFound";
 import RecordAudio from "./pages/RecordAudio";
 import TranscribeAudio from "./pages/TranscribeAudio";
 import ValidateAudio from "./pages/ValidateAudio";
-import AdminUpload from "./pages/AdminUpload";
+import UserProfile from "./pages/UserProfile";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +28,7 @@ const App = () => (
           <Route path="/record" element={<RecordAudio />} />
           <Route path="/transcribe" element={<TranscribeAudio />} />
           <Route path="/validate" element={<ValidateAudio />} />
-          <Route path="/admin/upload" element={<AdminUpload />} />
+          <Route path="/profile" element={<UserProfile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
